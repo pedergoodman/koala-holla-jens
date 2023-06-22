@@ -29,7 +29,7 @@ res.sendStatus(201)
     console.log(`Error making query ${queryText}`, err)
     res.sendStatus(500)
 })
-})clear
+})
 
 // PUT
 
