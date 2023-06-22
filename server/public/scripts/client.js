@@ -106,7 +106,7 @@ function deleteKoala() {
     .then((response) => {
       console.log('dleted a koala');
       //getting up to date data for the koalas
-      
+      getKoalas()
     }).catch((error) => {
       console.log('Error in DELETE request: ', error);
       alert('Error with deleting a song');
