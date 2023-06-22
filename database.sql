@@ -1,4 +1,4 @@
-CREAT TABLE "koala" (
+CREATE TABLE "koala" (
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR(70) NOT NULL,
     "gender" VARCHAR(10) NOT NULL,
