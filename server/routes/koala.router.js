@@ -8,7 +8,7 @@ const koalaRouter = express.Router()
 
 
 // POST
-app.post('/koalas', (req, res) => {
+koalaRouter.post('/koalas', (req, res) => {
     //log to see if post is working 
     console.log('inside of koalas 🐨, req.body', req.body);
     let id = req.body.id
