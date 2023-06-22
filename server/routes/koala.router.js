@@ -6,7 +6,7 @@ const pool = require('../modules/pool');
 
 
 // GET
-router.get('/', (req, res) => {
+koalaRouter.get('/', (req, res) => {
   console.log('in /koala GET');
 
   let queryText = `SELECT * FROM "kolas"`
@@ -26,7 +26,7 @@ router.get('/', (req, res) => {
 
 
 // PUT
-router.put('/:id', (req, res) => {
+koalaRouter.put('/:id', (req, res) => {
     const idToUpdate = req.params.id;
     let query = `UPDATE "koala" SET "ready_to_transfer"=true WHERE "id"=$1`;
     pool.query(query, [idToUpdate])
