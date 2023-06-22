@@ -3,6 +3,7 @@ console.log( 'js' );
 $( document ).ready( function(){
   console.log( 'JQ' );
   // Establish Click Listeners
+
   setupClickListeners()
   // load existing koalas on page load
   getKoalas();
@@ -37,4 +38,21 @@ function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
   // ajax call to server to get koalas
  
+}
+
+function render(listOfKoalas) {
+  $('#viewKoalas').empty();
+  for(let koala of listOfKoalas) {
+    let newRow = $(`
+      <tr data-id="${koala.id}>
+        <td>${koala.name}</td>
+        <td>${koala.gender}</td>
+        <td>${koala.age}</td>
+        <td>${koala.ready_for_transfer}</td>
+        <td><button class="transfer-btn">Ready for Transfer</button></td>
+        <td>${koala.notes}</td>
+        <td><button class="delete-btn">Delete</button></td>
+      </tr>
+    `)
+  }
 }
