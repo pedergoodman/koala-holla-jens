@@ -9,7 +9,7 @@ const pool = require('../modules/pool');
 koalaRouter.get('/', (req, res) => {
   console.log('in /koala GET');
 
-  let queryText = `SELECT * FROM "kolas"`
+  let queryText = `SELECT * FROM "koala"`
 
   pool.query(queryText)
     .then((result) => {
@@ -23,7 +23,7 @@ koalaRouter.get('/', (req, res) => {
 });
 
 // POST
-app.post('/koala', (req, res) => {
+koalaRouter.post('/koala', (req, res) => {
     //log to see if post is working 
 console.log('inside of koalas 🐨, req.body', req.body);
 let id = req.body.id
