@@ -57,18 +57,19 @@ function saveKoala( newKoala ){
     gender: $('#genderIn').val(),
     ready_to_transfer:$('#readyForTransferIn').val()
   }
+
   console.log('saving Koala', savedKoala);
     // ajax call to server to get koalas
     $.ajax({
       method: 'POST',
       url: '/koalas',
-      data: saveKoala
+      data: savedKoala
     }).then(function(response) {
       console.log(response);
       getKoalas()
     }).catch(function(error) {
-      console.log('error in song post', error); 
-      alert('Error adding song. Please try again later.')       
+      console.log('error in koala post', error); 
+      alert('Error adding koala. Please try again later.')       
   });
 }
 
