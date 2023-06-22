@@ -60,7 +60,7 @@ function transferKoala() {
   console.log(`${koalaId}`);
   $.ajax({
     type: 'PUT',
-    url: `/koala/${koalaId}`
+    url: `/koalas/${koalaId}`
   }).then((response) => {
     console.log('Koala has been updated in /koala')
     getKoalas();
@@ -76,9 +76,9 @@ function render(listOfKoalas) {
   for(let koala of listOfKoalas) {
     let hiddenButton
 
-    console.log(koala);
-
-    if (koala.ready_for_transfer) {
+    console.log(koala.ready_to_transfer);
+    
+    if (koala.ready_to_transfer) {
       hiddenButton = "Already transferred"
     } else {
       hiddenButton = `<button class="transfer-btn">Ready for Transfer</button>`
@@ -88,7 +88,6 @@ function render(listOfKoalas) {
         <td>${koala.name}</td>
         <td>${koala.gender}</td>
         <td>${koala.age}</td>
-        <td>${koala.ready_for_transfer}</td>
         <td>${hiddenButton}</td>
         <td>${koala.notes}</td>
         <td><button class="delete-btn">Delete</button></td>
