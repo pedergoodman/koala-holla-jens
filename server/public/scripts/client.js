@@ -75,13 +75,16 @@ function render(listOfKoalas) {
   $('#viewKoalas').empty();
   for(let koala of listOfKoalas) {
     let hiddenButton
+
+    console.log(koala);
+
     if (koala.ready_for_transfer) {
       hiddenButton = "Already transferred"
     } else {
-      hiddenButton = <button class="transfer-btn">Ready for Transfer</button>
+      hiddenButton = `<button class="transfer-btn">Ready for Transfer</button>`
     }
     let newRow = $(`
-      <tr data-id="${koala.id}>
+      <tr data-id="${koala.id}">
         <td>${koala.name}</td>
         <td>${koala.gender}</td>
         <td>${koala.age}</td>
