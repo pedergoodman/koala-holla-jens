@@ -7,7 +7,7 @@ $( document ).ready( function(){
   setupClickListeners()
   // load existing koalas on page load
   getKoalas();
-
+  $('#viewKoalas').on('click', '.transfer-btn', transferKoala)
 }); // end doc ready
 
 function setupClickListeners() {
@@ -38,6 +38,23 @@ function saveKoala( newKoala ){
   console.log( 'in saveKoala', newKoala );
   // ajax call to server to get koalas
  
+}
+
+function transferKoala() {
+  console.log('in transferKoala: ', $(this));
+  const koalaId = $(this).parent().parent().data('id');
+  console.log(`${koalaId}`);
+  $.ajax({
+    type: 'PUT',
+    url: `/koala/${koalaId}`
+  }).then((response) => {
+    console.log('Koala has been updated in /koala')
+    getKoalas();
+  }).catch((error) => {
+    console.log('Error in UPDATE request: ', error);
+    alert('Error in updating a koala')
+  })
+  
 }
 
 function render(listOfKoalas) {
