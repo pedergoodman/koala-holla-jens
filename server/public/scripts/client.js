@@ -75,6 +75,9 @@ function render(listOfKoalas) {
   $('#viewKoalas').empty();
   for(let koala of listOfKoalas) {
     let hiddenButton
+
+    console.log(koala);
+
     if (koala.ready_for_transfer) {
       hiddenButton = "Already transferred"
     } else {
