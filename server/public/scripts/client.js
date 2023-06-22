@@ -78,10 +78,10 @@ function render(listOfKoalas) {
     if (koala.ready_for_transfer) {
       hiddenButton = "Already transferred"
     } else {
-      hiddenButton = <button class="transfer-btn">Ready for Transfer</button>
+      hiddenButton = `<button class="transfer-btn">Ready for Transfer</button>`
     }
     let newRow = $(`
-      <tr data-id="${koala.id}>
+      <tr data-id="${koala.id}">
         <td>${koala.name}</td>
         <td>${koala.gender}</td>
         <td>${koala.age}</td>

@@ -23,7 +23,7 @@ koalaRouter.get('/', (req, res) => {
 });
 
 // POST
-app.post('/koala', (req, res) => {
+koalaRouter.post('/koala', (req, res) => {
     //log to see if post is working 
 console.log('inside of koalas 🐨, req.body', req.body);
 let id = req.body.id
