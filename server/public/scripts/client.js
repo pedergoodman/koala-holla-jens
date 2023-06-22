@@ -60,16 +60,24 @@ function transferKoala() {
 function render(listOfKoalas) {
   $('#viewKoalas').empty();
   for(let koala of listOfKoalas) {
+    let hiddenButton
+    if (koala.ready_for_transfer) {
+      hiddenButton = "Already transferred"
+    } else {
+      hiddenButton = <button class="transfer-btn">Ready for Transfer</button>
+    }
     let newRow = $(`
       <tr data-id="${koala.id}>
         <td>${koala.name}</td>
         <td>${koala.gender}</td>
         <td>${koala.age}</td>
         <td>${koala.ready_for_transfer}</td>
-        <td><button class="transfer-btn">Ready for Transfer</button></td>
+        <td>${hiddenButton}</td>
         <td>${koala.notes}</td>
         <td><button class="delete-btn">Delete</button></td>
       </tr>
-    `)
+    `);
+    console.log(newRow.data('id'));
+      $('#viewKoalas').append(newRow)
   }
 }
