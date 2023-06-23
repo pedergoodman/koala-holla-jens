@@ -11,7 +11,7 @@ $(document).ready(function () {
   $('#viewKoalas').on('click', '.transfer-btn', transferKoala)
   $('#viewKoalas').on('click', '.delete-btn', deleteKoala)
 
-  swal('hello World!')
+  // swal('hello World!')
 }); // end doc ready
 
 function setupClickListeners() {
@@ -113,20 +113,20 @@ function deleteKoala() {
 
   }).then((willDelete) => {
     //sending a delete request to the server
-    
-    $.ajax({
-      method: 'DELETE',
-      url: `/koalas/${koalaId}`
-    })
-      .then((response) => {
-        console.log('dleted a koala');
-        //getting up to date data for the koalas
-        getKoalas()
-      }).catch((error) => {
-        console.log('Error in DELETE request: ', error);
-        alert('Error with deleting a song');
+    if(willDelete) {
+      $.ajax({
+        method: 'DELETE',
+        url: `/koalas/${koalaId}`
       })
-
+        .then((response) => {
+          console.log('dleted a koala');
+          //getting up to date data for the koalas
+          getKoalas()
+        }).catch((error) => {
+          console.log('Error in DELETE request: ', error);
+          alert('Error with deleting a song');
+        })
+    }
   });
  
 
