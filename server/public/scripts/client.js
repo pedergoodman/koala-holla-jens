@@ -6,30 +6,31 @@ $(document).ready(function () {
   console.log('JQ');
   // Establish Click Listeners
 
-  setupClickListeners()
+  // setupClickListeners()
   // load existing koalas on page load
   getKoalas();
+  $('#addButton').on('click', saveKoala)
   $('#viewKoalas').on('click', '.transfer-btn', transferKoala)
   $('#viewKoalas').on('click', '.delete-btn', deleteKoala)
 }); // end doc ready
 
-function setupClickListeners() {
-  $('#addButton').on('click', function () {
-    console.log('in addButton on click');
-    // get user input and put in an object
-    // NOT WORKING YET :(
-    // using a test object
-    let koalaToSend = {
-      name: 'testName',
-      age: 'testName',
-      gender: 'testName',
-      readyForTransfer: 'testName',
-      notes: 'testName',
-    };
-    // call saveKoala with the new obejct
-    saveKoala(koalaToSend);
-  });
-}
+//  function setupClickListeners() {
+//   $('#addButton').on('click', function () {
+//     console.log('in addButton on click');
+//     // get user input and put in an object
+//     // NOT WORKING YET :(
+//     // using a test object
+//     let koalaToSend = {
+//       name: 'testName',
+//       age: 'testName',
+//       gender: 'testName',
+//       readyForTransfer: 'testName',
+//       notes: 'testName',
+//     };
+//     // call saveKoala with the new obejct
+//     saveKoala(koalaToSend);
+//   });
+// }
 
 function getKoalas() {
   console.log('in getKoalas');
@@ -58,7 +59,8 @@ function saveKoala(newKoala) {
     name: $('#nameIn').val(),
     age: $('#ageIn').val(),
     gender: $('#genderIn').val(),
-    ready_to_transfer: $('#readyForTransferIn').val()
+    ready_to_transfer: $('#readyForTransferIn').val(),
+    notes: $('#notesIn').val()
   }
   console.log('saving Koala', savedKoala);
   // ajax call to server to get koalas
@@ -70,8 +72,8 @@ function saveKoala(newKoala) {
     console.log(response);
     getKoalas()
   }).catch(function (error) {
-    console.log('error in saved koala post', error);
-    alert('Error adding song. Please try again later.')
+    console.log('error in koala post', error);
+    alert('Error adding Koala. Please try again later.')
   });
 }
 
@@ -122,15 +124,18 @@ function render(listOfKoalas) {
     console.log(koala.ready_to_transfer);
 
     if (koala.ready_to_transfer) {
-      hiddenButton = "Already transferred"
+      koalaStatus = "Y"
+      hiddenButton = `<button class="transfer-btn" id="not-ready-transfer">Unready Koala</button>`
     } else {
-      hiddenButton = `<button class="transfer-btn">Ready for Transfer</button>`
+      koalaStatus = "N"
+      hiddenButton = `<button class="transfer-btn" id="ready-transfer">Ready for Transfer</button>`
     }
     let newRow = $(`
       <tr data-id="${koala.id}">
         <td>${koala.name}</td>
         <td>${koala.gender}</td>
         <td>${koala.age}</td>
+        <td>${koalaStatus}</td>
         <td>${hiddenButton}</td>
         <td>${koala.notes}</td>
         <td><button class="delete-btn">Delete</button></td>
