@@ -6,31 +6,31 @@ $(document).ready(function () {
   console.log('JQ');
   // Establish Click Listeners
 
-  setupClickListeners()
+  // setupClickListeners()
   // load existing koalas on page load
   getKoalas();
- 
+  $('#addButton').on('click', saveKoala)
   $('#viewKoalas').on('click', '.transfer-btn', transferKoala)
   $('#viewKoalas').on('click', '.delete-btn', deleteKoala)
 }); // end doc ready
 
-function setupClickListeners() {
-  $('#addButton').on('click', function () {
-    console.log('in addButton on click');
-    // get user input and put in an object
-    // NOT WORKING YET :(
-    // using a test object
-    let koalaToSend = {
-      name: 'testName',
-      age: 'testName',
-      gender: 'testName',
-      readyForTransfer: 'testName',
-      notes: 'testName',
-    };
-    // call saveKoala with the new obejct
-    saveKoala(koalaToSend);
-  });
-}
+//  function setupClickListeners() {
+//   $('#addButton').on('click', function () {
+//     console.log('in addButton on click');
+//     // get user input and put in an object
+//     // NOT WORKING YET :(
+//     // using a test object
+//     let koalaToSend = {
+//       name: 'testName',
+//       age: 'testName',
+//       gender: 'testName',
+//       readyForTransfer: 'testName',
+//       notes: 'testName',
+//     };
+//     // call saveKoala with the new obejct
+//     saveKoala(koalaToSend);
+//   });
+// }
 
 function getKoalas() {
   console.log('in getKoalas');
@@ -59,20 +59,21 @@ function saveKoala(newKoala) {
     name: $('#nameIn').val(),
     age: $('#ageIn').val(),
     gender: $('#genderIn').val(),
-    ready_to_transfer: $('#readyForTransferIn').val()
+    ready_to_transfer: $('#readyForTransferIn').val(),
+    notes: $('#notesIn').val()
   }
   console.log('saving Koala', savedKoala);
   // ajax call to server to get koalas
   $.ajax({
     method: 'POST',
     url: '/koalas',
-    data: saveKoala
+    data: savedKoala
   }).then(function (response) {
     console.log(response);
     getKoalas()
   }).catch(function (error) {
-    console.log('error in song post', error);
-    alert('Error adding song. Please try again later.')
+    console.log('error in koala post', error);
+    alert('Error adding Koala. Please try again later.')
   });
 }
 

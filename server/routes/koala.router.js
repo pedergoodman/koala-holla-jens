@@ -23,19 +23,19 @@ koalaRouter.get('/', (req, res) => {
 });
 
 // POST
-koalaRouter.post('/koalas', (req, res) => {
+koalaRouter.post('/', (req, res) => {
     //log to see if post is working 
     console.log('inside of koalas 🐨, req.body', req.body);
-    let id = req.body.id
     let name = req.body.name
     let gender = req.body.gender
     let age = req.body.age
     let ready_to_transfer = req.body.ready_to_transfer
+    let notes = req.body.notes
     //query text for the data fields and sql injection prevention 
-    const queryText = `INSERT INTO "koala" (id, name, gender, age, ready_to_trasnfer)
+    const queryText = `INSERT INTO "koala" (name, gender, age, ready_to_transfer, notes)
 VALUES ($1, $2, $3, $4, $5)`
     //redeclaring our data fields 
-    const queryParams = [id, name, gender, age, ready_to_transfer]
+    const queryParams = [name, gender, age, ready_to_transfer, notes]
     //bringing in the pool 
     pool.query(queryText, queryParams)
         .then((results) => {
@@ -49,7 +49,7 @@ VALUES ($1, $2, $3, $4, $5)`
 // PUT
 koalaRouter.put('/:id', (req, res) => {
     const idToUpdate = req.params.id;
-    let query = `UPDATE "koala" SET "ready_to_transfer" = NOT "ready_to_transfer" "id"=$1`;
+    let query = `UPDATE "koala" SET "ready_to_transfer" = NOT "ready_to_transfer" WHERE "id"=$1`;
     pool.query(query, [idToUpdate])
     .then((result) => {
         console.log('Koala updated!');
