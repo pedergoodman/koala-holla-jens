@@ -1,5 +1,4 @@
 
-
 console.log('js');
 
 $(document).ready(function () {
@@ -12,6 +11,8 @@ $(document).ready(function () {
   $('#addButton').on('click', saveKoala)
   $('#viewKoalas').on('click', '.transfer-btn', transferKoala)
   $('#viewKoalas').on('click', '.delete-btn', deleteKoala)
+
+  // swal('hello World!')
 }); // end doc ready
 
 //  function setupClickListeners() {
@@ -62,6 +63,7 @@ function saveKoala(newKoala) {
     ready_to_transfer: $('#readyForTransferIn').val(),
     notes: $('#notesIn').val()
   }
+
   console.log('saving Koala', savedKoala);
   // ajax call to server to get koalas
   $.ajax({
@@ -100,19 +102,35 @@ function deleteKoala() {
   //dom traversal to delete the actaual thing we want 
   const koalaId = $(this).parent().parent().data('id')
 
-  //sending a delete request to the server
-  $.ajax({
-    method: 'DELETE',
-    url: `/koalas/${koalaId}`
-  })
-    .then((response) => {
-      console.log('deleted a koala');
-      //getting up to date data for the koalas
-      getKoalas()
-    }).catch((error) => {
-      console.log('Error in DELETE request: ', error);
-      alert('Error with deleting a koala');
-    })
+  console.log('koalaId is', koalaId);
+  
+
+
+  swal({
+    title: 'Are you sure?',
+    text: "click delete to leave this koala in the wild",
+    icon: "warning",
+    buttons: true,
+    dangerMode: true
+
+  }).then((willDelete) => {
+    //sending a delete request to the server
+    if(willDelete) {
+      $.ajax({
+        method: 'DELETE',
+        url: `/koalas/${koalaId}`
+      })
+        .then((response) => {
+          console.log('dleted a koala');
+          //getting up to date data for the koalas
+          getKoalas()
+        }).catch((error) => {
+          console.log('Error in DELETE request: ', error);
+          alert('Error with deleting a song');
+        })
+    }
+  });
+ 
 
 }
 
