@@ -1,5 +1,4 @@
 
-
 console.log('js');
 
 $(document).ready(function () {
@@ -11,6 +10,8 @@ $(document).ready(function () {
   getKoalas();
   $('#viewKoalas').on('click', '.transfer-btn', transferKoala)
   $('#viewKoalas').on('click', '.delete-btn', deleteKoala)
+
+  swal('hello World!')
 }); // end doc ready
 
 function setupClickListeners() {
@@ -111,7 +112,8 @@ function deleteKoala() {
     dangerMode: true
 
   }).then((willDelete) => {
-     //sending a delete request to the server
+    //sending a delete request to the server
+    
     $.ajax({
       method: 'DELETE',
       url: `/koalas/${koalaId}`
