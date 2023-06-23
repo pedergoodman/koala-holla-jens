@@ -109,7 +109,7 @@ function deleteKoala() {
       getKoalas()
     }).catch((error) => {
       console.log('Error in DELETE request: ', error);
-      alert('Error with deleting a song');
+      alert('Error with deleting a koala');
     })
 
 }
