@@ -49,7 +49,7 @@ VALUES ($1, $2, $3, $4, $5)`
 // PUT
 koalaRouter.put('/:id', (req, res) => {
     const idToUpdate = req.params.id;
-    let query = `UPDATE "koala" SET "ready_to_transfer"=true WHERE "id"=$1`;
+    let query = `UPDATE "koala" SET "ready_to_transfer" = NOT "ready_to_transfer" "id"=$1`;
     pool.query(query, [idToUpdate])
     .then((result) => {
         console.log('Koala updated!');

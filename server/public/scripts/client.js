@@ -7,11 +7,13 @@ $( document ).ready( function(){
   setupClickListeners()
   // load existing koalas on page load
   getKoalas();
+ 
   $('#viewKoalas').on('click', '.transfer-btn', transferKoala)
+  $('#viewKoalas').on('click', '.delete-btn', deleteKoala)
 }); // end doc ready
 
 function setupClickListeners() {
-  $( '#addButton' ).on( 'click', function(){
+{
     console.log( 'in addButton on click' );
     // get user input and put in an object
     // NOT WORKING YET :(
@@ -93,19 +95,20 @@ function render(listOfKoalas) {
   $('#viewKoalas').empty();
   for(let koala of listOfKoalas) {
     let hiddenButton
-
-    console.log(koala.ready_to_transfer);
-    
+    let koalaStatus
     if (koala.ready_to_transfer) {
-      hiddenButton = "Already transferred"
+      koalaStatus = "Y"
+      hiddenButton = `<button class="transfer-btn" ">Unready Koala</button>`
     } else {
-      hiddenButton = `<button class="transfer-btn">Ready for Transfer</button>`
+      koalaStatus = "N"
+      hiddenButton = `<button class="transfer-btn"">Ready for Transfer</button>`
     }
     let newRow = $(`
       <tr data-id="${koala.id}">
         <td>${koala.name}</td>
         <td>${koala.gender}</td>
         <td>${koala.age}</td>
+        <td>${koalaStatus}</td>
         <td>${hiddenButton}</td>
         <td>${koala.notes}</td>
         <td><button class="delete-btn">Delete</button></td>
