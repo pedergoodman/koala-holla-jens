@@ -66,12 +66,12 @@ function saveKoala(newKoala) {
   $.ajax({
     method: 'POST',
     url: '/koalas',
-    data: saveKoala
+    data: savedKoala
   }).then(function (response) {
     console.log(response);
     getKoalas()
   }).catch(function (error) {
-    console.log('error in song post', error);
+    console.log('error in saved koala post', error);
     alert('Error adding song. Please try again later.')
   });
 }
@@ -105,12 +105,12 @@ function deleteKoala() {
     url: `/koalas/${koalaId}`
   })
     .then((response) => {
-      console.log('dleted a koala');
+      console.log('deleted a koala');
       //getting up to date data for the koalas
       getKoalas()
     }).catch((error) => {
       console.log('Error in DELETE request: ', error);
-      alert('Error with deleting a song');
+      alert('Error with deleting a koala');
     })
 
 }
