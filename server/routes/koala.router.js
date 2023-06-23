@@ -62,8 +62,8 @@ koalaRouter.put('/:id', (req, res) => {
 })
 
 // DELETE
-Router.delete('/:id', (req, res) => {
-    idToDelete = req.params.id
+koalaRouter.delete('/:id', (req, res) => {
+    let idToDelete = req.params.id
     //query text to delete koalas by id and to protect against sql injection
     let queryText = `DELETE FROM "koala" WHERE id = $1;`
     //connecting with the data base and running our query
